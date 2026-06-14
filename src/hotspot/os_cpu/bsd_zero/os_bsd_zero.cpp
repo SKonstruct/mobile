@@ -274,6 +274,9 @@ int os::extra_bang_size_in_bytes() {
 }
 
 #if defined(AARCH64) && defined(__APPLE__)
+WXMode DefaultWXWriteMode = WXWrite;
+THREAD_LOCAL bool os::_jit_exec_enabled = false;
+void os::thread_wx_enable_write_impl() {}
 void os::current_thread_enable_wx(WXMode mode) {
 #ifndef __IOS__
   pthread_jit_write_protect_np(mode == WXExec);

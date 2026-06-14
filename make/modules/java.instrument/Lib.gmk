@@ -47,6 +47,11 @@ $(eval $(call SetupJdkLibrary, BUILD_LIBINSTRUMENT, \
         -framework ApplicationServices \
         -framework Cocoa \
         -framework Security, \
+    LIBS_ios := \
+        -liconv \
+        -framework CoreFoundation \
+        -framework Foundation \
+        -framework Security, \
     LIBS_windows := advapi32.lib, \
 ))
 

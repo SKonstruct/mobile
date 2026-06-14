@@ -138,6 +138,7 @@ TARGETS += $(BUILD_LIBJAVAJPEG)
 ################################################################################
 
 ifeq ($(ENABLE_HEADLESS_ONLY), false)
+  ifeq ($(call isTargetOs, ios), false)
   LIBSPLASHSCREEN_EXTRA_SRC := \
       common/awt/systemscale \
       #
@@ -278,6 +279,7 @@ ifeq ($(ENABLE_HEADLESS_ONLY), false)
   ))
 
   TARGETS += $(BUILD_LIBSPLASHSCREEN)
+  endif
 endif
 
 ################################################################################
@@ -375,7 +377,7 @@ endif
 
 ifeq ($(call isTargetOs, windows), true)
   LIBFONTMANAGER_EXCLUDE_FILES += X11FontScaler.c X11TextRenderer.c
-else ifeq ($(call isTargetOs, macosx), true)
+else ifeq ($(call isTargetOs, macosx ios), true)
   LIBFONTMANAGER_EXCLUDE_FILES += X11FontScaler.c X11TextRenderer.c \
       fontpath.c lcdglyph.c
 else
@@ -410,10 +412,15 @@ $(eval $(call SetupJdkLibrary, BUILD_LIBFONTMANAGER, \
     LDFLAGS_aix := -Wl$(COMMA)-berok, \
     JDK_LIBS := libawt java.base:libjava $(LIBFONTMANAGER_JDK_LIBS), \
     JDK_LIBS_macosx := libawt_lwawt, \
+    JDK_LIBS_ios := libawt_headless, \
     JDK_LIBS_unix := java.base:libjvm, \
     LIBS := $(LIBFONTMANAGER_LIBS), \
     LIBS_unix := $(LIBM), \
     LIBS_macosx := \
+        -framework CoreFoundation \
+        -framework CoreGraphics \
+        -framework CoreText, \
+    LIBS_ios := \
         -framework CoreFoundation \
         -framework CoreGraphics \
         -framework CoreText, \

@@ -54,7 +54,7 @@ ifeq ($(call isCompiler, gcc), true)
   SetSharedLibraryName = \
       -Wl,-soname=$1
 else ifeq ($(call isCompiler, clang), true)
-  ifeq ($(call isTargetOs, macosx), true)
+  ifeq ($(call isTargetOs, macosx ios), true)
     SetSharedLibraryName = \
         -Wl,-install_name,@rpath/$1
   else ifeq ($(call isTargetOs, aix), true)

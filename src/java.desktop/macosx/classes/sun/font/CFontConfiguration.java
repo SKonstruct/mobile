@@ -99,6 +99,11 @@ final class CFontConfiguration extends FontConfiguration {
     }
 
     @Override
+    protected void initReorderMap() {
+        reorderMap = new HashMap<>();
+    }
+
+    @Override
     public String getFallbackFamilyName(String fontName,
                                         String defaultFallback)
     {
@@ -106,7 +111,12 @@ final class CFontConfiguration extends FontConfiguration {
     }
 
     @Override
-    protected void initReorderMap() {
-        reorderMap = new HashMap<>();
+    public String getVersion() {
+        return "1";
+    }
+
+    @Override
+    public String getExtraFontPath() {
+        return "";
     }
 }

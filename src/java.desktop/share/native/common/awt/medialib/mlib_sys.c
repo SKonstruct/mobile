@@ -26,7 +26,7 @@
 
 #include <stdlib.h>
 #include <string.h>
-#ifdef MACOSX
+#if defined(MACOSX) || defined(__APPLE__)
 #include <unistd.h>
 #include <sys/param.h>
 #else
@@ -79,7 +79,7 @@ void *__mlib_malloc(mlib_u32 size)
    * aligned for the storage of any type of object (see 'man malloc').
    */
   return (void *) malloc(size);
-#elif defined(MACOSX)
+#elif defined(MACOSX) || defined(__APPLE__)
   return valloc(size);
 #else
   return (void *) memalign(8, size);

@@ -44,6 +44,11 @@ else ifeq ($(call isCompiler, clang), true)
         -Wl,-rpath,@loader_path$(or $1,/.)
     SetSharedLibraryOrigin = \
         -Wl,-rpath,@loader_path$(or $1,/.)
+  else ifeq ($(call isTargetOs, ios), true)
+    SetExecutableOrigin = \
+        -Wl,-rpath,@loader_path$(or $1,/.)
+    SetSharedLibraryOrigin = \
+        -Wl,-rpath,@loader_path$(or $1,/.)
   else ifeq ($(call isTargetOs, aix), true)
     SetExecutableOrigin =
     SetSharedLibraryOrigin =

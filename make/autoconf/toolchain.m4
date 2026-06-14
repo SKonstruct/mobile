@@ -178,7 +178,7 @@ AC_DEFUN([TOOLCHAIN_SETUP_FILENAME_PATTERNS],
     EXECUTABLE_SUFFIX='.exe'
   else
     LIBRARY_PREFIX=lib
-    if test "x$OPENJDK_TARGET_OS" = xmacosx; then
+    if test "x$OPENJDK_TARGET_OS" = xmacosx || test "x$OPENJDK_TARGET_OS" = xios; then
       SHARED_LIBRARY_SUFFIX='.dylib'
     else
       SHARED_LIBRARY_SUFFIX='.so'
